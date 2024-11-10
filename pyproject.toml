@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "course-papper-django"
+version = "0.1.0"
+description = ""
+authors = ["Maria-Fedorova <157302242+Maria-Fedorova@users.noreply.github.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+django = "^4.2.7"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
