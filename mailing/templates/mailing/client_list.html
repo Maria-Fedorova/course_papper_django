@@ -32,10 +32,10 @@
         <td>{{object.owner}}</td>
         {% endif %}
 
-        <td><a href="{% url 'mailing:client_detail' object.pk%}" class="btn btn-primary">detail view</a></td>
+        <td><a href="{% url 'mailing:client_detail' object.pk%}" class="btn btn-primary"> Подробнее</a></td>
         {% if not user.is_staff%}
-        <td><a href="{% url 'mailing:client_delete' object.pk%}" class="btn btn-primary">delete</a></td>
-        <td><a href="{% url 'mailing:client_update' object.pk%}" class="btn btn-primary">edit</a></td>
+        <td><a href="{% url 'mailing:client_delete' object.pk%}" class="btn btn-primary">Удалить</a></td>
+        <td><a href="{% url 'mailing:client_update' object.pk%}" class="btn btn-primary">Редактировать</a></td>
         {% endif %}
     </tr>
     {% endfor %}

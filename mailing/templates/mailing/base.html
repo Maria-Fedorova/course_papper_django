@@ -7,6 +7,91 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #f8f9fa;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        h1 {
+            color: #2196F3;
+            margin: 0;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav li {
+            margin-left: 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            padding: 10px 15px;
+            border-radius: 5px;
+            background-color: #fff;
+            transition: background-color 0.3s;
+        }
+
+        nav a:hover {
+            background-color: #e0e0e0;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        .time-container {
+            text-align: center;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+
+        .time-container p {
+            margin: 0;
+            color: #2196F3;
+        }
+
+        .cooking-section {
+            background-color: #fff;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+
+        .cooking-section h2 {
+            color: #2196F3;
+        }
+
+        .cooking-section p {
+            margin-bottom: 10px;
+        }
+
+        .cooking-section a {
+            text-decoration: none;
+            color: #2196F3;
+        }
+
+        .cooking-section a:hover {
+            text-decoration: underline;
+        }
+    </style>
 
     <title>{{title}}</title>
 
@@ -18,43 +103,50 @@
 </head>
 
 <body>
-
+<header>
+    <h1>Сервис рассылок</h1>
+</header>
 <div class="container">
-
     <div class="masthead">
-        <h3 class="text-muted">Сервис рассылок</h3>
-
         {% include 'mailing/includes/inc_menu.html' with object=object %}
-
-
     </div>
+    <div class="jumbotron">
+        <h1>{{title}}</h1>
+    </div>
+    {% block content %}
+    {% endblock %}
 
 
-        <div class="jumbotron">
-            <h1>{{title}}</h1>
-
+    <footer class="footer">
+        <div class="time-container">
+            <p id="current-time"></p>
         </div>
 
-        {% block content %}
-        {% endblock %}
+        <script>
+            function displayTime() {
+                const now = new Date();
+                const options = {
+                    weekday: 'long',
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    hour: 'numeric',
+                    minute: 'numeric'
+                };
+                document.getElementById('current-time').textContent = now.toLocaleDateString('ru-Ru', options);
+            }
 
-<!--            <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus-->
-<!--                commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet.</p>-->
-<!--            <p><a class="btn btn-lg btn-success" href="#" role="button">Get started today</a></p>-->
+            setInterval(displayTime, 1000); // Update the time every second
+            displayTime(); // Display the time initially
+        </script>
+        <p>&copy; 2024-{% now 'Y'%}</p>
+    </footer>
 
-    <!-- Site footer -->
-        <footer class="footer">
-            <p>&copy; 2024-{% now 'Y'%}</p>
-        </footer>
+</div>
 
-    </div> <!-- /container -->
+<script src="{% static 'js/popper.min.js'%}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
 
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-
-    <script src="{% static 'js/popper.min.js'%}"></script>
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
 </body>
 </html>
