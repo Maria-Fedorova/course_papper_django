@@ -24,13 +24,13 @@ def get_mailing_from_cache():
 
 
 def send_mailing(mailing):
-    emailing_list = [client.email for client in mailing.clients.all()]
+    email_list = [client.email for client in mailing.clients.all()]
     try:
         response_server = send_mail(
             topic=mailing.message.topic,
             message=mailing.message.body,
             from_email=settings.EMAIL_HOST_USER,
-            recipient_list=emails_list,
+            recipient_list=email_list,
             fail_silently=False,
         )
         log = LogMailing.objects.create(mailing=mailing, status=True, response=response_server)

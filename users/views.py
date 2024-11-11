@@ -3,7 +3,6 @@ import string
 from random import random
 
 from django.conf import settings
-from django.contrib.auth.forms import PasswordResetForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.mail import send_mail
 from django.shortcuts import get_object_or_404, redirect

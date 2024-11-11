@@ -42,4 +42,3 @@ class MessageForm(StyleFormMixin, forms.ModelForm):
         model = Message
         # fields = "__all__"
         exclude = ("owner",)
-
