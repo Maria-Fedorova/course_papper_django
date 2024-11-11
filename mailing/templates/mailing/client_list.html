@@ -1,0 +1,45 @@
+{% extends 'mailing/index.html' %}
+{% block content %}
+<div class="col-12 mb-5">
+    {% if not user.is_staff%}
+    <p><a class="btn btn-primary" href="{% url 'mailing:client_create'%}" role="button">Добавить клиента</a></p>
+    {% endif %}
+</div>
+<table class="table">
+    <thead>
+    <tr>
+
+        <th scope="col">Фамилия</th>
+        <th scope="col">Имя</th>
+        <th scope="col">Отчество</th>
+        <th scope="col">Email</th>
+        <th scope="col">Комментарий</th>
+        {% if user.is_staff or user.is_superuser%}
+        <th scope="col">Автор</th>
+        {% endif %}
+    </tr>
+    </thead>
+    <tbody>
+    {% for object in object_list %}
+
+    <tr>
+        <td>{{object.last_name}}</td>
+        <td>{{object.first_name}}</td>
+        <td>{{object.middle_name}}</td>
+        <td>{{object.email}}</td>
+        <td>{{object.comment}}</td>
+        {% if user.is_staff or user.is_superuser%}
+        <td>{{object.owner}}</td>
+        {% endif %}
+
+        <td><a href="{% url 'mailing:client_detail' object.pk%}" class="btn btn-primary"> Подробнее</a></td>
+        {% if not user.is_staff%}
+        <td><a href="{% url 'mailing:client_delete' object.pk%}" class="btn btn-primary">Удалить</a></td>
+        <td><a href="{% url 'mailing:client_update' object.pk%}" class="btn btn-primary">Редактировать</a></td>
+        {% endif %}
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</div>
+{% endblock %}

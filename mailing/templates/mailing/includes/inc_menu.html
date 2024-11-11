@@ -1,0 +1,53 @@
+<nav class="navbar navbar-expand-md navbar-light bg-light rounded mb-3">
+    <style>
+        .collapse navbar-collapse {
+            padding: 10px 20px;
+            border-radius: 5px;
+            background-color: #2196F3;
+            color: white;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+    </style>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav text-md-center nav-justified w-100">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'mailing:index' %}">Главная</a>
+            </li>
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'blog:blog_list' %}">Блог</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'mailing:client_list' %}">Клиенты</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'mailing:message_list' %}">Сообщения</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'mailing:mailing_list' %}">Рассылки</a>
+            </li>
+            <li class="nav-item">
+                <a class="p-2 btn btn-outline-primary" href="{% url 'users:profile' %}">Профиль</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'mailing:contacts' %}">Контакты</a>
+            </li>
+            <li class="nav-item">
+                <a class="p-2 btn btn-outline-primary" href="{% url 'users:logout' %}">Выйти</a>
+            </li>
+            {% endif %}
+
+            {% if user.is_authenticated %}
+
+
+            {% else %}
+            <a class="p-2 btn btn-outline-primary" href="{% url 'users:login' %}">Войти</a>
+            <a class="p-2 btn btn-outline-primary" href="{% url 'users:register' %}">Регистрация</a>
+            {% endif %}
+
+
+        </ul>
+    </div>
+</nav>

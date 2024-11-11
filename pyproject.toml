@@ -2,7 +2,7 @@
 name = "course-papper-django"
 version = "0.1.0"
 description = ""
-authors = ["Maria-Fedorova <157302242+Maria-Fedorova@users.noreply.github.com>"]
+authors = ["Maria-Fedorova"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
@@ -10,6 +10,9 @@ python = "^3.11"
 django = "^4.2.7"
 python-dotenv = "^1.0.1"
 psycopg2-binary = "^2.9.10"
+apscheduler = "^3.10.4"
+django-apscheduler = "^0.7.0"
+pillow = "^11.0.0"
 
 
 [build-system]
