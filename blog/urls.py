@@ -1,9 +1,15 @@
 from django.urls import path
-from mailing.apps import MailingConfig
-from mailing.views import home
+from django.views.decorators.cache import cache_page
 
-app_name = MailingConfig.name
+import blog
+from blog.apps import BlogConfig
+from blog.views import BlogListView, BlogDetailView
+
+app_name = BlogConfig.name
 
 urlpatterns = [
-    path("", home, name="home"),
+    #path('', blog, name='blog_list'),
+    # path("blog", cache_page(60)(BlogListView.as_view()), name="blog"),
+    path("blog", BlogListView.as_view(), name="blog_list"),
+    path("blog/<int:pk>/", BlogDetailView.as_view(), name="blog_detail"),
 ]
