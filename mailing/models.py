@@ -27,14 +27,14 @@ class Client(models.Model):
 
 class Mailing(models.Model):
     PERIOD = [
-        ("Раз в день", "раз в день"),
-        ("Раз в неделю", "раз в неделю"),
-        ("Раз в месяц", "раз в месяц"),
+        ('daily', 'Once a day'),
+        ('weekly', 'Once a week'),
+        ('monthly', 'Once a month'),
     ]
     STATUS = [
-        ("создана", "создана"),
-        ("запущена", "запущена"),
-        ('завершена', 'завершена'),
+        ('created', 'Created'),
+        ('launched', 'Launched'),
+        ('completed', 'Completed'),
     ]
     name = models.CharField(unique=True, max_length=255, verbose_name="Тема рассылки")
     clients = models.ManyToManyField("Client", verbose_name="Клиенты")
