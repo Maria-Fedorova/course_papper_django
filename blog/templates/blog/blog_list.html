@@ -2,13 +2,10 @@
 
 {% block content %}
 
-
-<div class="row">
+<div class="blog-section">
     {% for object in object_list %}
-    <div class="col-lg-4">
-        <h2> {{object|title}}</h2>
-        <p> {{object.body|slice:300}}</p>
-        <p><a class="btn btn-primary" href="{% url 'blog:blog_detail' object.pk %}" role="button">Подробнее &raquo;</a></p>
+    <div class="blog-card">
+        {% include 'mailing/includes/inc_blog.html' with object=object %}
     </div>
     {% endfor %}
 </div>

@@ -1,66 +1,134 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сервис рассылок</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Roboto', sans-serif;
-            background-color: #f0f2f5;
-            color: #333;
             margin: 0;
             padding: 0;
+            background-color: #f0f2f5;
+            color: #333;
         }
 
         header {
-            background-color: #f8f9fa;
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            background-color: #2196F3;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
         }
 
-        h1 {
-            color: #2196F3;
+        header h1 {
+            color: #f8f9fa;
             margin: 0;
         }
 
-        nav ul {
-            list-style: none;
-            margin: 0;
-            padding: 0;
+        nav {
             display: flex;
-        }
-
-        nav li {
-            margin-left: 20px;
+            justify-content: center;
+            background-color: #343a40;
         }
 
         nav a {
+            color: white;
+            padding: 15px 25px;
             text-decoration: none;
-            color: #333;
-            padding: 10px 15px;
-            border-radius: 5px;
-            background-color: #fff;
-            transition: background-color 0.3s;
+            text-transform: uppercase;
+            font-weight: bold;
+            display: inline-block;
         }
 
         nav a:hover {
-            background-color: #e0e0e0;
+            background-color: #495057;
         }
 
-        main {
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .statistics-table {
+            width: 100%;
+            margin-bottom: 40px;
+            border-collapse: collapse;
+        }
+
+        .statistics-table th, .statistics-table td {
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        .statistics-table th {
+            background-color: #2196F3;
+            color: white;
+        }
+
+        .statistics-table td {
+            background-color: #ffffff;
+        }
+
+        .blog-section {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .blog-card {
+            background-color: white;
             padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 30%;
+            text-align: center;
+        }
+
+        .blog-card img {
+            width: 100%;
+            border-radius: 8px;
+            max-height: 150px;
+            object-fit: cover;
+        }
+
+        .blog-card h3 {
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+
+        .blog-card p {
+            color: #555;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        .btn {
+            background-color: #2196F3; /* Синий фон */
+            color: white; /* Белый текст */
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #0056b3; /* Тёмно-синий цвет при наведении */
+        }
+
+        .btn:active {
+            background-color: #004085; /* Цвет кнопки при нажатии */
         }
 
         .time-container {
             text-align: center;
             padding: 20px;
-            background-color: #f8f9fa;
+            background-color: #f0f2f5;
         }
 
         .time-container p {
@@ -68,41 +136,23 @@
             color: #2196F3;
         }
 
-        .cooking-section {
-            background-color: #fff;
-            padding: 20px;
-            margin-top: 20px;
-            border-radius: 5px;
+        footer {
+            background-color: #f0f2f5;
+            color: black;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
         }
 
-        .cooking-section h2 {
-            color: #2196F3;
-        }
-
-        .cooking-section p {
-            margin-bottom: 10px;
-        }
-
-        .cooking-section a {
-            text-decoration: none;
-            color: #2196F3;
-        }
-
-        .cooking-section a:hover {
-            text-decoration: underline;
+        footer p {
+            margin: 0;
         }
     </style>
-
-    <title>{{title}}</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="{% static 'css/justified-nav.css' %}" rel="stylesheet">
 </head>
-
 <body>
+
 <header>
     <h1>Сервис рассылок</h1>
 </header>
@@ -115,7 +165,6 @@
     </div>
     {% block content %}
     {% endblock %}
-
 
     <footer class="footer">
         <div class="time-container">
@@ -141,12 +190,6 @@
         </script>
         <p>&copy; 2024-{% now 'Y'%}</p>
     </footer>
-
 </div>
-
-<script src="{% static 'js/popper.min.js'%}"></script>
-<script src="{% static 'js/bootstrap.min.js' %}"></script>
-
-
 </body>
 </html>

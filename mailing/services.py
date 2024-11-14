@@ -4,6 +4,7 @@ from datetime import datetime
 import pytz
 from django.core.mail import send_mail
 
+from blog.models import Blog
 from config.settings import CACHE_ENABLED
 from django.core.cache import cache
 from django.conf import settings
@@ -21,6 +22,18 @@ def get_mailing_from_cache():
     else:
         mailings_count = Mailing.objects.all().count()
     return mailings_count
+
+
+def get_post_blog_from_cache() -> list:
+    if CACHE_ENABLED:
+        key = "post"
+        post_list = cache.get(key)
+        if post_list is None:
+            post_list = Blog.objects.all()
+            cache.set(key, post_list)
+    else:
+        post_list = Blog.objects.all()
+    return post_list
 
 
 def send_mailing(mailing):

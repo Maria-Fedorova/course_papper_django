@@ -2,16 +2,17 @@ import random
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
+from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView, TemplateView
 
 from blog.models import Blog
 from mailing.forms import ClientForm, MessageForm, MailingForm
 from mailing.models import Client, Message, Mailing
-from mailing.services import get_mailing_from_cache
+from mailing.services import get_mailing_from_cache, get_post_blog_from_cache
 
 
-class ContactsView(TemplateView):
+class ContactsView(LoginRequiredMixin, TemplateView):
     template_name = 'mailing/contacts.html'
 
 
@@ -21,16 +22,11 @@ class IndexListView(LoginRequiredMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
-        context_data["mail_count"] = get_mailing_from_cache()
-        context_data["active_mail_count"] = len(Mailing.objects.filter(is_active=True))
-        context_data["client_count"] = len(Client.objects.all())
-        #context_data["object_list"] = random.sample(list(Blog.objects.all()), 3)
-
+        context_data["total_mailings"] = get_mailing_from_cache()
+        context_data["active_mailings"] = len(Mailing.objects.filter(is_active=True))
+        context_data["unique_client"] = len(Client.objects.all())
+        context_data["blog_random"] = random.sample(list(get_post_blog_from_cache()), 3)
         return context_data
-
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        return Blog.objects.all()[:3]
 
 
 class ClientListView(LoginRequiredMixin, ListView):
@@ -195,3 +191,13 @@ class MailingDeleteView(LoginRequiredMixin, DeleteView):
         if user.is_superuser or self.object.owner == user:
             return self.object
         raise PermissionDenied
+
+
+def activity(request, pk):
+    mailing_item = get_object_or_404(Mailing, pk=pk)
+    if mailing_item.is_active:
+        mailing_item.is_active = False
+    else:
+        mailing_item.is_active = True
+    mailing_item.save()
+    return redirect('mailing:mailing_list')

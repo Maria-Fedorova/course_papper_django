@@ -3,9 +3,10 @@ import string
 from random import random
 
 from django.conf import settings
+from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.mail import send_mail
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, FormView, UpdateView
 
@@ -76,3 +77,24 @@ class ProfileView(LoginRequiredMixin, UpdateView):
 
     def get_object(self, queryset=None):
         return self.request.user
+
+
+def activity(request, pk):
+    user_item = get_object_or_404(User, pk=pk)
+    if user_item.is_active:
+        user_item.is_active = False
+    else:
+        user_item.is_active = True
+    user_item.save()
+    return redirect('users:user_list')
+
+
+@login_required
+@permission_required(['users.view_user', 'users.set_is_active'])
+def get_users(request):
+    users_list = User.objects.all()
+    context = {
+        'object_list': users_list,
+        'title': 'Список пользователей сервиса',
+    }
+    return render(request, 'users/user_list.html', context)

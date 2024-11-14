@@ -5,10 +5,9 @@
     <p><a class="btn btn-primary" href="{% url 'mailing:client_create'%}" role="button">Добавить клиента</a></p>
     {% endif %}
 </div>
-<table class="table">
+<table class="statistics-table">
     <thead>
     <tr>
-
         <th scope="col">Фамилия</th>
         <th scope="col">Имя</th>
         <th scope="col">Отчество</th>
@@ -17,6 +16,7 @@
         {% if user.is_staff or user.is_superuser%}
         <th scope="col">Автор</th>
         {% endif %}
+        <th scope="col"></th>
     </tr>
     </thead>
     <tbody>
