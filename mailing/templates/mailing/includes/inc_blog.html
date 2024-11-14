@@ -1,6 +1,6 @@
 <div class="col-lg-4">
-
-    <h2> {{object|title}}</h2>
-    <p> {{object.body|slice:300}}</p>
-    <p><a class="btn btn-primary" href="{% url 'blog:view' object.pk %}" role="button">Подробнее &raquo;</a></p>
+    <img {{object.image}} alt="Blog image">
+    <h3> {{object|title}}</h3>
+    <p> {{object.description|slice:300}}</p>
+    <p><a class="btn" href="{% url 'blog:blog_detail' object.pk %}" role="button">Подробнее &raquo;</a></p>
 </div>
